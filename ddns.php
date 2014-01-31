@@ -27,18 +27,20 @@ $recordName = $config['record_name'];
 
 $ip = getIP();
 
+$verbose = !isset($argv[1]) || $argv[1] != '-s';
+
 try 
 {
-  $record = getExistingRecord($api, $domain, $recordName);
+  $record = getExistingRecord($api, $domain, $recordName, $verbose);
   if (!$record)
   {
-    echo "No existing record found. Creating a new one\n";
+    if ($verbose) echo "No existing record found. Creating a new one\n";
     $ret = $api->rec_new($domain, 'A', $recordName, $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   elseif($record['type'] != 'A')
   {
-    echo "Record exists but is not an A record. Fixing that.\n";
+    if ($verbose) echo "Record exists but is not an A record. Fixing that.\n";
     $ret = $api->rec_delete($domain, $record['rec_id']);
     throwExceptionIfError($ret);
     $ret = $api->rec_new($domain, 'A', $recordName, $ip, $config['ttl'], $config['cloudflare_active']);
@@ -46,14 +48,15 @@ try
   }
   elseif($record['content'] != $ip)
   {
-    echo "Record exists. Updating IP.\n";
+    if ($verbose) echo "Record exists. Updating IP.\n";
     $ret = $api->rec_edit('grin.io', 'A', $record['rec_id'], $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   else
   {
-    echo "Record OK. No need to update.\n";
+    if ($verbose) echo "Record OK. No need to update.\n";
   }
+  return 0;
 }
 catch (Exception $e)
 {
@@ -69,9 +72,9 @@ function getIP()
 }
 
 
-function getExistingRecord($api, $domain, $recordName)
+function getExistingRecord($api, $domain, $recordName, $verbose)
 {
-  echo "Getting existing record.\n";
+  if ($verbose) echo "Getting existing record.\n";
   $retry = false;
   $count = 0;
   do {
