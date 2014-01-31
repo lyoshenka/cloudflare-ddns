@@ -65,7 +65,7 @@ catch (Exception $e)
 // http://stackoverflow.com/questions/3097589/getting-my-public-ip-via-api
 function getIP()
 {
-  return trim(file_get_contents('http://icanhazip.com'));
+  return trim(file_get_contents('http://checkip.dyndns.org/'));
 }
 
 
