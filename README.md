@@ -20,3 +20,7 @@ If everythings works, put it in your crontab.
 ```
 0 * * * * /path/to/cloudflare-ddns/ddns.sh -s
 ``` 
+
+## License
+
+Uncopyrighted. Do whatever you want. I hope this code makes you rich. Spiritually.
