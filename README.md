@@ -4,8 +4,19 @@ A dynamic DNS script that uses CloudFlare's free DNS and their API
 
 ## Setup
 
-1. `git clone https://github.com/lyoshenka/cloudflare-ddns.git`
-1. `cd cloudflare-ddns`
-1. `mv config.php.skel config.php`
-1. Edit config.php - enter your CloudFlare credentials and domain details.
-1. `./ddns.php`
+```
+git clone https://github.com/lyoshenka/cloudflare-ddns.git
+cd cloudflare-ddns
+cp config.php.skel config.php
+```
+Edit config.php - enter your CloudFlare credentials and domain details.
+
+```
+./ddns.php
+```
+
+If everythings works, put it in your crontab.
+
+```
+0 * * * * /path/to/cloudflare-ddns/ddns.sh -s
+``` 
