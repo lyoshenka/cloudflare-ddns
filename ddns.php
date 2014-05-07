@@ -49,7 +49,7 @@ try
   elseif($record['content'] != $ip)
   {
     if ($verbose) echo "Record exists. Updating IP.\n";
-    $ret = $api->rec_edit('grin.io', 'A', $record['rec_id'], $ip, $config['ttl'], $config['cloudflare_active']);
+    $ret = $api->rec_edit($domain, 'A', $record['rec_id'], $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   else
