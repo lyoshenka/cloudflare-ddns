@@ -1,15 +1,16 @@
 #!/usr/bin/env php
 <?php
 
-require 'Cloudflare.php';
+require __DIR__ . '/Cloudflare.php';
 
-if (!file_exists('config.php'))
+$confFile = __DIR__ . '/config.php';
+if (!file_exists($confFile))
 {
   echo "Please copy config.php.skel to config.php and fill out the values therein.\n";
   return 1;
 }
 
-$config = require 'config.php';
+$config = require $confFile;
 
 foreach(array('cloudflare_email','cloudflare_api_key','domain','record_name','ttl','cloudflare_active') as $key)
 {
