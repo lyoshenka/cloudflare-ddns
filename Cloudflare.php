@@ -370,7 +370,7 @@ class Cloudflare {
         $data['a']            = 'rec_edit';
         $data['z']            = $domain;
         $data['type']         = $type;
-        $data['id']         = $id;
+        $data['id']           = $id;
         $data['name']         = $name;
         $data['content']      = $content;
         $data['ttl']          = $ttl;
