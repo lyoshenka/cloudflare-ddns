@@ -35,13 +35,13 @@ try
   $record = getExistingRecord($api, $domain, $recordName, $verbose);
   if (!$record)
   {
-    if ($verbose) echo "No existing record found. Creating a new one\n";
+    if ($verbose) echo "No existing record found.  Creating a new one\n";
     $ret = $api->rec_new($domain, 'A', $recordName, $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   elseif($record['type'] != 'A')
   {
-    if ($verbose) echo "Record exists but is not an A record. Fixing that.\n";
+    if ($verbose) echo "Record exists, but having an issue recoving the 'A' record.  Fixing that at the moment.\n";
     $ret = $api->rec_delete($domain, $record['rec_id']);
     throwExceptionIfError($ret);
     $ret = $api->rec_new($domain, 'A', $recordName, $ip, $config['ttl'], $config['cloudflare_active']);
@@ -49,13 +49,13 @@ try
   }
   elseif($record['content'] != $ip)
   {
-    if ($verbose) echo "Record exists. Updating IP.\n";
+    if ($verbose) echo "Record exists!  Updating to the new IP address.\n";
     $ret = $api->rec_edit($domain, 'A', $record['rec_id'], $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   else
   {
-    if ($verbose) echo "Record OK. No need to update.\n";
+    if ($verbose) echo "Record appears OK.  No need to update.\n";
   }
   return 0;
 }
@@ -69,7 +69,8 @@ catch (Exception $e)
 // http://stackoverflow.com/questions/3097589/getting-my-public-ip-via-api
 function getIP()
 {
-  return trim(file_get_contents('http://ipv4.icanhazip.com/'));
+  // icanhazip.com is semi-ready for IPv6, some users may have issues connecting due to DNS errors... :c
+  return trim(file_get_contents('http://icanhazip.com/'));
 }
 
 
