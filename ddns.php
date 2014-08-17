@@ -67,6 +67,7 @@ catch (Exception $e)
 
 
 // http://stackoverflow.com/questions/3097589/getting-my-public-ip-via-api
+// http://major.io/icanhazip-com-faq/
 function getIP($protocol)
 {
   $prefixes = array('ipv4' => 'ipv4.', 'ipv6' => 'ipv6.', 'auto' => '');
