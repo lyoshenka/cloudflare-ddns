@@ -9,5 +9,7 @@ return array(
                        // the record must be part of the domain that you specified above
 
   'ttl' => 1, // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
-  'cloudflare_active' => 0 // is cloudflare active on this record. 1 = orange cloud, 0 = grey cloud
+  'cloudflare_active' => 0, // is cloudflare active on this record. 1 = orange cloud, 0 = grey cloud
+
+  'protocol' => 'ipv4' // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6', "auto".
 );

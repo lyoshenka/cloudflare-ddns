@@ -6,13 +6,13 @@ require __DIR__ . '/Cloudflare.php';
 $confFile = __DIR__ . '/config.php';
 if (!file_exists($confFile))
 {
-  echo "Please copy config.php.skel to config.php and fill out the values therein.\n";
+  echo "Missing config file. Please copy config.php.skel to config.php and fill out the values therein.\n";
   return 1;
 }
 
 $config = require $confFile;
 
-foreach(array('cloudflare_email','cloudflare_api_key','domain','record_name','ttl','cloudflare_active') as $key)
+foreach(array('cloudflare_email','cloudflare_api_key','domain','record_name','ttl','cloudflare_active', 'protocol') as $key)
 {
   if (!isset($config[$key]) || $config[$key] === '')
   {
@@ -26,7 +26,7 @@ $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']
 $domain = $config['domain'];
 $recordName = $config['record_name'];
 
-$ip = getIP();
+$ip = getIP($config['protocol']);
 
 $verbose = !isset($argv[1]) || $argv[1] != '-s';
 
@@ -49,13 +49,13 @@ try
   }
   elseif($record['content'] != $ip)
   {
-    if ($verbose) echo "Record exists. Updating IP.\n";
+    if ($verbose) echo "Record exists. Updating to the new IP address.\n";
     $ret = $api->rec_edit($domain, 'A', $record['rec_id'], $ip, $config['ttl'], $config['cloudflare_active']);
     throwExceptionIfError($ret);
   }
   else
   {
-    if ($verbose) echo "Record OK. No need to update.\n";
+    if ($verbose) echo "Record appears OK. No need to update.\n";
   }
   return 0;
 }
@@ -67,9 +67,14 @@ catch (Exception $e)
 
 
 // http://stackoverflow.com/questions/3097589/getting-my-public-ip-via-api
-function getIP()
+function getIP($protocol)
 {
-  return trim(file_get_contents('http://ipv4.icanhazip.com/'));
+  $prefixes = array('ipv4' => 'ipv4.', 'ipv6' => 'ipv6.', 'auto' => '');
+  if (!isset($prefixes[$protocol]))
+  {
+    throw new Exception('Invalid "protocol" config value.');
+  }
+  return trim(file_get_contents('http://' . $prefixes[$protocol] . 'icanhazip.com'));
 }
 
 
