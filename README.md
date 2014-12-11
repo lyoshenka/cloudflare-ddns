@@ -15,7 +15,7 @@ Edit config.php - enter your CloudFlare credentials and domain details.
 ./ddns.php
 ```
 
-If everythings works, put it in your crontab.
+If everything works, put it in your crontab.
 
 ```
 0 * * * * /path/to/cloudflare-ddns/ddns.php -s
