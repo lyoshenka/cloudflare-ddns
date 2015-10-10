@@ -1,6 +1,6 @@
 # cloudflare-ddns
 
-A dynamic DNS script that uses CloudFlare's free DNS and their API
+A dynamic DNS script (written in PHP) that uses CloudFlare's free DNS and their API to set up a dynamic DNS record pointing to your server.
 
 ## Setup
 
