@@ -8,10 +8,7 @@ A dynamic DNS script (written in PHP) that uses CloudFlare's free DNS and their 
 git clone https://github.com/lyoshenka/cloudflare-ddns.git
 cd cloudflare-ddns
 cp config.php.skel config.php
-```
-Edit config.php - enter your CloudFlare credentials and domain details.
-
-```
+### Edit config.php - enter your CloudFlare credentials and domain details
 ./ddns.php
 ```
 
