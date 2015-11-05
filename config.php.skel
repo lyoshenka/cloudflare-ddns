@@ -2,7 +2,7 @@
 
 return array(
   'cloudflare_email' => '', // the email address you use to log into CloudFlare
-  'cloudflare_api_key' => '', // your CloudFlare token. Get it here: https://www.cloudflare.com/my-account
+  'cloudflare_api_key' => '', // your CloudFlare token. Get it here: https://www.cloudflare.com/a/account/my-account
   
   'domain' => '', // the name of the domain that this record is for (e.g. "example.com")
   'record_name' => '', // the full name of the record that this script will update (e.g. "my.computer.example.com")
