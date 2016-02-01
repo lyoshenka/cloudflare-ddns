@@ -21,3 +21,7 @@ If everything works, put it in your crontab.
 ## License
 
 Uncopyrighted. Do whatever you want. I hope this code makes you rich. Spiritually.
+
+## No PHP?
+
+For an even simpler version written in Bash, see [this gist](https://gist.github.com/lyoshenka/6257440).
