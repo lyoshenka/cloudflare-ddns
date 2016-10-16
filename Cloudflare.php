@@ -49,7 +49,8 @@ class Cloudflare
 
     $headers = [
       'X-Auth-Email: ' . $this->email,
-      'X-Auth-Key: ' . $this->apiKey
+      'X-Auth-Key: ' . $this->apiKey,
+      'User-Agent: {__FILE__}'
     ];
 
     $url = self::ENDPOINT . ltrim($endpoint, '/');
