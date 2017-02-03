@@ -2,22 +2,13 @@
 
 A dynamic DNS script (written in PHP) that uses CloudFlare's free DNS and their API to set up a dynamic DNS record pointing to your server.
 
-## Setup
+## How To Use
 
 ```
 git clone https://github.com/lyoshenka/cloudflare-ddns.git
 cd cloudflare-ddns
 cp config.php.skel config.php
 ### Edit config.php - enter your CloudFlare credentials and domain details
-```
-
-## Use
-
-### Local mode
-
-Run this to update the Cloudflare DNS record to point to the public IP of the machine you're on.
-
-```
 ./ddns.php
 ```
 
@@ -27,9 +18,9 @@ If everything works, put it in your crontab.
 0 * * * * /path/to/cloudflare-ddns/ddns.php -s
 ``` 
 
-### API mode
+### Extra feature: API mode
 
-You can put this script on a server and use the "dynamic DNS" option of your router to trigger the IP update.
+If you want, you can put this script on a web server and use the "dynamic DNS" option of your router to trigger the IP update.
 
 To do this, first enable API mode by setting an `auth_token` value in your config. 
 
