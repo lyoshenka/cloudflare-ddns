@@ -11,9 +11,11 @@ cp config.php.skel config.php
 ### Edit config.php - enter your CloudFlare credentials and domain details
 ```
 
+## Use
+
 ### Local mode
 
-Uses the public IP of the machine you're running this on to update your CF record.
+Run this to update the Cloudflare DNS record to point to the public IP of the machine you're on.
 
 ```
 ./ddns.php
@@ -27,11 +29,11 @@ If everything works, put it in your crontab.
 
 ### API mode
 
-You can put this script on a server and use the DynDns option of your router to trigger the IP update.
+You can put this script on a server and use the "dynamic DNS" option of your router to trigger the IP update.
 
-To do this set ``auth_token`` in your config which enables API mode.
+To do this, first enable API mode by setting an `auth_token` value in your config. 
 
-Then you can call the script like this: ``yourdomain/ddns.php?auth_token=yourtoken&ip=127.0.0.1``
+Then, configure your router to call the script like this: `https://example.com/ddns.php?auth_token=YOUR_TOKEN&ip=IP_ADDR`
 
 ## License
 

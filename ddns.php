@@ -26,33 +26,20 @@ $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']
 $domain     = $config['domain'];
 $recordName = $config['record_name'];
 
-if (isset($config['auth_token']) && $config['auth_token'] != '')
+if (isset($config['auth_token']) && $config['auth_token'])
 {
-    if (empty($_GET['auth_token']))
-    {
-        echo "missing auth_token";
-        return 1;
-    }
-
-    if (empty($_GET['ip']))
-    {
-        echo "missing ip";
-        return 1;
-    }
-
-    if ($_GET['auth_token'] == $config['auth_token'])
-    {
-        $ip = $_GET['ip'];
-    }
-    else
-    {
-        echo "invalid auth_token";
-        return 1;
-    }
+  // API mode. Use IP from request params.
+  if (empty($_GET['auth_token']) || empty($_GET['ip']) || $_GET['auth_token'] != $config['auth_token'])
+  {
+    echo "Missing or invalid 'auth_token' param, or missing 'ip' param\n";
+    return 1;
+  }
+  $ip = $_GET['ip'];
 }
 else
 {
-    $ip = getIP($config['protocol']);
+  // Local mode. Get IP from service.
+  $ip = getIP($config['protocol']);
 }
 
 $verbose = !isset($argv[1]) || $argv[1] != '-s';
@@ -62,7 +49,7 @@ try
   $zone = $api->getZone($domain);
   if (!$zone)
   {
-    echo "domain $domain not found\n";
+    echo "Domain $domain not found\n";
     return 1;
   }
 

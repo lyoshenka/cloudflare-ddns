@@ -12,7 +12,7 @@ return array(
 
   'protocol' => 'ipv4', // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6", "auto".
 
-  'auth_token' => '' // (optional) if set this is used for authentication and restricting usage to api mode
+  'auth_token' => '' // (optional) if set, enable API mode and require this auth_token to set IP
                      // generate a random string here:
-                     // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new
+                     // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&format=plain
 );
