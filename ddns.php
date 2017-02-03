@@ -26,7 +26,34 @@ $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']
 $domain     = $config['domain'];
 $recordName = $config['record_name'];
 
-$ip = getIP($config['protocol']);
+if (isset($config['auth_token']) && $config['auth_token'] != '')
+{
+    if (empty($_GET['auth_token']))
+    {
+        echo "missing auth_token";
+        return 1;
+    }
+
+    if (empty($_GET['ip']))
+    {
+        echo "missing ip";
+        return 1;
+    }
+
+    if ($_GET['auth_token'] == $config['auth_token'])
+    {
+        $ip = $_GET['ip'];
+    }
+    else
+    {
+        echo "invalid auth_token";
+        return 1;
+    }
+}
+else
+{
+    $ip = getIP($config['protocol']);
+}
 
 $verbose = !isset($argv[1]) || $argv[1] != '-s';
 
