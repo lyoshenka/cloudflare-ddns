@@ -26,7 +26,7 @@ $recordName = $config['record_name'][0];
 
 // set domain and record from request if value exists in config
 if ($_GET['domain'] || $_GET['record']) {
-    if ($_GET['domain'] && $_GET['record'] && in_array($config['domains'], $_GET['domain']) && in_array($config['record_names'], $_GET['record'])) {
+    if ($_GET['domain'] && $_GET['record'] && in_array($config['domain'], $_GET['domain']) && in_array($config['record_name'], $_GET['record'])) {
         $domain = $_GET['domain'];
         $recordName = $_GET['record'];
     } else {
