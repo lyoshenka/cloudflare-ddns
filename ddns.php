@@ -21,8 +21,8 @@ foreach (['cloudflare_email', 'cloudflare_api_key', 'domain', 'record_name', 'tt
 $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']);
 
 // default to first value of config array
-$domain = $config['domains'][0];
-$recordName = $config['record_names'][0];
+$domain = $config['domain'][0];
+$recordName = $config['record_name'][0];
 
 // set domain and record from request if value exists in config
 if ($_GET['domain'] || $_GET['record']) {
