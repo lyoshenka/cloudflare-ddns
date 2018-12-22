@@ -26,6 +26,8 @@ To do this, first enable API mode by setting an `auth_token` value in your confi
 
 Then, configure your router to call the script like this: `https://example.com/ddns.php?auth_token=YOUR_TOKEN&ip=IP_ADDR`
 
+With Mikrotik devices you can use this script https://github.com/Arcanum417/cloudflare-ddns-mikrotik
+
 ## License
 
 Uncopyrighted. Do whatever you want. I hope this code makes you rich. Spiritually.
