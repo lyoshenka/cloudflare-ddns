@@ -72,7 +72,9 @@ try {
     $record = $records && $records[0]['name'] == $recordName ? $records[0] : null;
 
     if (!$record) {
-        if ($verbose) echo "No existing record found. Creating a new one\n";
+        if ($verbose) {
+            echo "No existing record found. Creating a new one\n";
+        }
         $ret = $api->createDnsRecord($zone['id'], 'A', $recordName, $ip, [
             'ttl' => $config['ttl'],
             'proxied' => $config['proxied'],
@@ -83,7 +85,9 @@ try {
         $record['ttl'] != $config['ttl'] ||
         $record['proxied'] != $config['proxied']
     ) {
-        if ($verbose) echo "Updating record.\n";
+        if ($verbose) {
+            echo "Updating record.\n";
+        }
         $ret = $api->updateDnsRecord($zone['id'], $record['id'], [
             'type' => 'A',
             'name' => $recordName,
@@ -92,7 +96,9 @@ try {
             'proxied' => $config['proxied'],
         ]);
     } else {
-        if ($verbose) echo "Record appears OK. No need to update.\n";
+        if ($verbose) {
+            echo "Record appears OK. No need to update.\n";
+        }
     }
     return 0;
 } catch (Exception $e) {
