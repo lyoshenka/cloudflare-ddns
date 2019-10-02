@@ -11,7 +11,15 @@ if (!file_exists($confFile)) {
 
 $config = require $confFile;
 
-foreach (['cloudflare_email', 'cloudflare_api_key', 'domain', 'record_name', 'ttl', 'protocol'] as $key) {
+foreach ([
+             'cloudflare_email',
+             'cloudflare_api_key',
+             'domain',
+             'record_name',
+             'ttl',
+             'protocol',
+             'proxied',
+         ] as $key) {
     if (!isset($config[$key]) || $config[$key] === '') {
         echo "config.php is missing the '$key' config value\n";
         return 1;
@@ -26,7 +34,12 @@ $recordName = $config['record_name'][0];
 
 // set domain and record from request if value exists in config
 if ($_GET['domain'] || $_GET['record']) {
-    if ($_GET['domain'] && $_GET['record'] && in_array($_GET['domain'], $config['domain']) && in_array($_GET['record'], $config['record_name'])) {
+    if (
+        $_GET['domain'] &&
+        $_GET['record'] &&
+        in_array($_GET['domain'], $config['domain']) &&
+        in_array($_GET['record'], $config['record_name'])
+    ) {
         $domain = $_GET['domain'];
         $recordName = $_GET['record'];
     } else {
@@ -60,14 +73,23 @@ try {
 
     if (!$record) {
         if ($verbose) echo "No existing record found. Creating a new one\n";
-        $ret = $api->createDnsRecord($zone['id'], 'A', $recordName, $ip, ['ttl' => $config['ttl']]);
-    } elseif ($record['type'] != 'A' || $record['content'] != $ip || $record['ttl'] != $config['ttl']) {
+        $ret = $api->createDnsRecord($zone['id'], 'A', $recordName, $ip, [
+            'ttl' => $config['ttl'],
+            'proxied' => $config['proxied'],
+        ]);
+    } elseif (
+        $record['type'] != 'A' ||
+        $record['content'] != $ip ||
+        $record['ttl'] != $config['ttl'] ||
+        $record['proxied'] != $config['proxied']
+    ) {
         if ($verbose) echo "Updating record.\n";
         $ret = $api->updateDnsRecord($zone['id'], $record['id'], [
             'type' => 'A',
             'name' => $recordName,
             'content' => $ip,
             'ttl' => $config['ttl'],
+            'proxied' => $config['proxied'],
         ]);
     } else {
         if ($verbose) echo "Record appears OK. No need to update.\n";

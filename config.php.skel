@@ -3,12 +3,14 @@
 return array(
   'cloudflare_email' => '', // the email address you use to log into CloudFlare
   'cloudflare_api_key' => '', // your CloudFlare token. Get it here: https://www.cloudflare.com/a/account/my-account
-  
+
   'domain' => [''], // the name of the domain that this record is for (e.g. "example.com")
   'record_name' => [''], // the full name of the record that this script will update (e.g. "my.computer.example.com")
                        // the record must be part of the domain that you specified above
 
   'ttl' => 1, // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
+
+  'proxied' => false, // Whether the record is receiving the performance and security benefits of Cloudflare
 
   'protocol' => 'ipv4', // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6", "auto".
 
