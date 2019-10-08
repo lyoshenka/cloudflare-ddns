@@ -27,8 +27,24 @@ foreach ([
 
 $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']);
 
-$domain = $config['domain'];
-$recordName = $config['record_name'];
+// default to first value of config array
+$domain = $config['domain'][0];
+$recordName = $config['record_name'][0];
+// set domain and record from request if value exists in config
+if ($_GET['domain'] || $_GET['record']) {
+    if (
+        $_GET['domain'] &&
+        $_GET['record'] &&
+        in_array($_GET['domain'], $config['domain']) &&
+        in_array($_GET['record'], $config['record_name'])
+    ) {
+        $domain = $_GET['domain'];
+        $recordName = $_GET['record'];
+    } else {
+        echo "Missing or invalid 'domain' or/and 'record_name' param\n";
+        return 1;
+    }
+}
 
 if (isset($config['auth_token']) && $config['auth_token']) {
     // API mode. Use IP from request params.
