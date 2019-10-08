@@ -17,6 +17,7 @@ foreach ([
              'domain',
              'record_name',
              'ttl',
+             'proxied',
              'protocol',
          ] as $key) {
     if (!isset($config[$key]) || $config[$key] === '') {
@@ -64,11 +65,13 @@ try {
         }
         $ret = $api->createDnsRecord($zone['id'], 'A', $recordName, $ip, [
             'ttl' => $config['ttl'],
+            'proxied' => $config['proxied'],
         ]);
     } elseif (
         $record['type'] != 'A' ||
         $record['content'] != $ip ||
-        $record['ttl'] != $config['ttl']
+        $record['ttl'] != $config['ttl'] ||
+        $record['proxied'] != $config['proxied']
     ) {
         if ($verbose) {
             echo "Updating record.\n";
@@ -78,6 +81,7 @@ try {
             'name' => $recordName,
             'content' => $ip,
             'ttl' => $config['ttl'],
+            'proxied' => $config['proxied'],
         ]);
     } else {
         if ($verbose) {

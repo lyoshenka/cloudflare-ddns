@@ -10,6 +10,8 @@ return array(
 
   'ttl' => 1,                   // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
 
+  'proxied' => false,           // Whether the record is receiving the performance and security benefits of Cloudflare
+
   'protocol' => 'ipv4',         // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6", "auto".
 
   'auth_token' => ''            // (optional) if set, enable API mode and require this auth_token to set IP
