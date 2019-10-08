@@ -4,9 +4,9 @@ return array(
   'cloudflare_email' => '',     // the email address you use to log into CloudFlare
   'cloudflare_api_key' => '',   // your CloudFlare token. Get it here: https://www.cloudflare.com/a/account/my-account
 
-  'domain' => '',               // the name of the domain that this record is for (e.g. "example.com")
-  'record_name' => '',          // the full name of the record that this script will update (e.g. "my.computer.example.com")
-                                // the record must be part of the domain that you specified above
+  'domain' => [''],             // the name of the domain(s) (e.g. "example.com")
+  'record_name' => [''],        // the full name of the record(s) that this script will update (e.g. "my.computer.example.com")
+                                // the record(s) must be part of the domain(s) that you specified above
 
   'ttl' => 1,                   // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
 
