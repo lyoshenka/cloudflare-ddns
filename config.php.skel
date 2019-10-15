@@ -1,18 +1,18 @@
 <?php
 
 return array(
-  'cloudflare_email' => '', // the email address you use to log into CloudFlare
-  'cloudflare_api_key' => '', // your CloudFlare token. Get it here: https://www.cloudflare.com/a/account/my-account
-  
-  'domain' => '', // the name of the domain that this record is for (e.g. "example.com")
-  'record_name' => '', // the full name of the record that this script will update (e.g. "my.computer.example.com")
-                       // the record must be part of the domain that you specified above
+  'cloudflare_email' => '',     // the email address you use to log into CloudFlare
+  'cloudflare_api_key' => '',   // your CloudFlare token. Get it here: https://www.cloudflare.com/a/account/my-account
 
-  'ttl' => 1, // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
+  'domain' => '',               // the name of the domain that this record is for (e.g. "example.com")
+  'record_name' => '',          // the full name of the record that this script will update (e.g. "my.computer.example.com")
+                                // the record must be part of the domain that you specified above
 
-  'protocol' => 'ipv4', // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6", "auto".
+  'ttl' => 1,                   // a TTL of 1 means "automatic". if you want a fixed TTL, make it >= 120 (seconds)
 
-  'auth_token' => '' // (optional) if set, enable API mode and require this auth_token to set IP
-                     // generate a random string here:
-                     // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&format=plain
+  'protocol' => 'ipv4',         // what protocol to use to get the ip address. Possible values: "ipv4", "ipv6", "auto".
+
+  'auth_token' => ''            // (optional) if set, enable API mode and require this auth_token to set IP
+                                // generate a random string here:
+                                // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&format=plain
 );

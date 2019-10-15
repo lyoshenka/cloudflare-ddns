@@ -33,3 +33,7 @@ Uncopyrighted. Do whatever you want. I hope this code makes you rich. Spirituall
 ## No PHP?
 
 For an even simpler version written in Bash, see [this gist](https://gist.github.com/lyoshenka/6257440).
+
+## Development
+
+Use [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) like `php-cs-fixer fix ddns.php  --rules=@PSR2` to enforce code style.
