@@ -32,17 +32,16 @@ $api = new Cloudflare($config['cloudflare_email'], $config['cloudflare_api_key']
 $domain = $config['domain'][0];
 $recordName = $config['record_name'][0];
 // set domain and record from request if value exists in config
-if ($_GET['domain'] || $_GET['record']) {
+if (isset($_GET['domain']) || isset($_GET['record'])) {
+    $domain = isset($_GET['domain']) ? $_GET['domain'] : null;
+    $recordName = isset($_GET['record']) ? $_GET['record'] : null;
     if (
-        $_GET['domain'] &&
-        $_GET['record'] &&
-        in_array($_GET['domain'], $config['domain']) &&
-        in_array($_GET['record'], $config['record_name'])
+        !$domain ||
+        !$recordName ||
+        !in_array($domain, $config['domain']) ||
+        !in_array($recordName, $config['record_name'])
     ) {
-        $domain = $_GET['domain'];
-        $recordName = $_GET['record'];
-    } else {
-        echo "Missing or invalid 'domain' or/and 'record_name' param\n";
+        echo "Missing 'domain' or 'record_name' param, or domain or record_name is not in predefined list\n";
         return 1;
     }
 }
